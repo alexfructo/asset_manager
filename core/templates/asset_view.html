@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%} - Equipamento - Cadastro{% endblock %}
+{% load widget_tweaks %}
+{% block content %}
+<h2 class="mb-4">Equipamento</h2>
+<div class="card mb-4">
+    <div class="card-header bg-white font-weight-bold">Formulário de Cadastro</div>
+    <div class="card-body">
+        {% csrf_token %}
+        <form>
+            <fieldset>
+                <div class="row">
+                    <div class="form-group col-md-1">
+                        <label for="{{form.codigo.auto_id}}">{{form.codigo.label}}</label>
+                        {% render_field form.codigo disabled=True class="form-control form-sm" placeholder=form.codigo.label %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="{{form.localizacao.auto_id}}">{{form.localizacao.label}}</label>
+                        <div class="input-group">
+                            {% render_field form.localizacao class="form-control form-sm" placeholder=form.localizacao.label %}
+                            <div class="input-group-append">
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Incluir" href="#"><i class='fa fa-fw fa-plus'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="{{form.setor.auto_id}}">{{form.setor.label}}</label>
+                        <div class="input-group">
+                            {% render_field form.setor class="form-control form-sm" placeholder=form.setor.label %}
+                            <div class="input-group-append">
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Incluir" href="#"><i class='fa fa-fw fa-plus'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="{{form.grupo.auto_id}}">{{form.grupo.label}}</label>
+                        <div class="input-group">
+                            {% render_field form.grupo class="form-control form-sm" placeholder=form.grupo.label %}
+                            <div class="input-group-append">
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Incluir" href="#"><i class='fa fa-fw fa-plus'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="{{form.categoria.auto_id}}">{{form.categoria.label}}</label>
+                        <div class="input-group">
+                            {% render_field form.categoria class="form-control form-sm" placeholder=form.categoria.label %}
+                            <div class="input-group-append">
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Incluir" href="#"><i class='fa fa-fw fa-plus'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="{{form.fabricante.auto_id}}">{{form.fabricante.label}}</label>
+                        <div class="input-group">
+                            {% render_field form.fabricante class="form-control form-sm" placeholder=fabricante.setor.label %}
+                            <div class="input-group-append">
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Incluir" href="#"><i class='fa fa-fw fa-plus'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="{{form.modelo.auto_id}}">{{form.modelo.label}}</label>
+                        {% render_field form.modelo class="form-control form-sm" placeholder=form.modelo.label %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="{{form.numero_serie.auto_id}}">{{form.numero_serie.label}}</label>
+                        {% render_field form.numero_serie class="form-control form-sm" placeholder=form.numero_serie.label %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="{{form.numero_patrimonio.auto_id}}">{{form.numero_patrimonio.label}}</label>
+                        {% render_field form.numero_patrimonio class="form-control form-sm" placeholder=form.numero_patrimonio.label %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="{{form.status.auto_id}}">{{form.status.label}}</label>
+                        {% render_field form.status class="form-control form-sm" placeholder=form.status.label %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label for="{{form.observacoes.auto_id}}">{{form.observacoes.label}}</label>
+                        {% render_field form.observacoes class="form-control form-sm" placeholder=form.observacoes.label %}
+                    </div>
+                </div>
+                <div class="box-actions">
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    <button class="btn btn-danger">Cancelar</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+{% endblock %}

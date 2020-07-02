@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootadmin.min.css' %}">
     {% block css %}{% endblock %}
-    <title>{% block title %}Asset Manager{% endblock %}</title>
+    <title>Asset Manager{% block title %}{% endblock %}</title>
 </head>
 <body class="bg-light">
 
@@ -36,7 +36,7 @@
     <div class="sidebar sidebar-dark bg-dark">
         <ul class="list-unstyled">
             <li><a href="{% url 'core:index' %}"><i class="fa fa-fw fa-tachometer-alt"></i> Painel</a></li>
-            <li><a href="{% url 'core:assets' %}"><i class="fa fa-fw fa-cube"></i> Ativos</a></li>
+            <li><a href="{% url 'core:assets' %}"><i class="fa fa-fw fa-cube"></i> Equipamentos</a></li>
         </ul>
     </div>
 

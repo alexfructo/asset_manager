@@ -3,8 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core import serializers
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, logout
-from .forms import LoginForm
+from .forms import LoginForm, EquipamentoForm
 from .models import Equipamento
 
 @login_required()
@@ -14,6 +13,16 @@ def index(request):
 @login_required()
 def assets(request):
     return render(request, 'assets.html')
+
+@login_required()
+def asset_view(request, cod_equipamento):
+    equipamento = Equipamento.objects.get(pk=cod_equipamento)
+
+    if equipamento:
+        form = EquipamentoForm(instance=equipamento)
+        return render(request, 'asset_view.html', {"equipamento":equipamento, "form":form})
+    else:
+        return HttpResponseRedirect()
 
 @login_required()
 def get_assets_ajax(request):
@@ -35,6 +44,10 @@ def user_login(request):
             else:
                 return redirect('core:index')
     return render(request, 'login.html', {'form': form})
+
+@login_required
+def error_404(request, message):
+    return render(request, '404.html', {"mensagem": message})
 
 
 @login_required()
