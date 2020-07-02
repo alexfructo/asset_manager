@@ -3,7 +3,7 @@ $(document).ready(function () {
         "language": {
             "url": "http://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese-Brasil.json"
         },
-        "ajax": "/ativos/listar/json",
+        "ajax": "/equipamentos/listar/json",
         "columns": [
             { "data": "localizacao" },
             { "data": "setor" },
@@ -17,7 +17,7 @@ $(document).ready(function () {
             {
                 "data": "codigo",
                 "render": function (data,) {
-                    result = "<a href='/ativo/alterar/" + data + "' class='btn btn-icon btn-pill btn-primary btn-sm' data-toggle='tooltip' title='Alterar'><i class='fa fa-fw fa-edit'></i> <a href='/ativo/remover/" + data + "' class='btn btn-icon btn-pill btn-danger btn-sm' data-toggle='tooltip' title='Remover'><i class='fa fa-fw fa-trash'></i></a>";
+                    result = "<a href='/equipamento/alterar/" + data + "' class='btn btn-icon btn-pill btn-primary btn-sm' data-toggle='tooltip' title='Alterar'><i class='fa fa-fw fa-edit'></i> <a href='/equipamento/remover/" + data + "' class='btn btn-icon btn-pill btn-danger btn-sm' data-toggle='tooltip' title='Remover'><i class='fa fa-fw fa-trash'></i></a>";
                     return  result
                 }
             }

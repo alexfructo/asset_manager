@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound,JsonResponse
 from django.core import serializers
 from django.contrib import messages
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, EquipamentoForm
 from .models import Equipamento
@@ -15,14 +16,18 @@ def assets(request):
     return render(request, 'assets.html')
 
 @login_required()
-def asset_view(request, cod_equipamento):
+def asset(request, cod_equipamento):
     equipamento = Equipamento.objects.get(pk=cod_equipamento)
-
     if equipamento:
-        form = EquipamentoForm(instance=equipamento)
-        return render(request, 'asset_view.html', {"equipamento":equipamento, "form":form})
+        if request.method == 'POST':
+            form = Equipamento(request.POST or None)
+            if form is not None and form.is_valid() == True:
+                pass
+        else:
+            form = EquipamentoForm(instance=equipamento)
+        return render(request, 'asset.html', {"form":form})
     else:
-        return HttpResponseRedirect()
+        return HttpResponseRedirect(error_404)
 
 @login_required()
 def get_assets_ajax(request):
