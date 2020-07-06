@@ -9,24 +9,22 @@
 <div class="card mb-4">
     <div class="card-body">
         <div class="card-body">
-            <div class="table-responsive">
-                <table id="assets" class="table table-hover" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Unidade</th>
-                            <th>Setor</th>
-                            <th>Localização</th>
-                            <th>Equipamento</th>
-                            <th>Fabricante</th>
-                            <th>Modelo</th>
-                            <th>Nº Série</th>
-                            <th>Nº Patrimônio</th>
-                            <th>Status</th>
-                            <th class="actions">Ações</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+            <table id="assets" class="table table-hover display responsive nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th data-priority="1">Unidade</th>
+                        <th>Setor</th>
+                        <th>Localização</th>
+                        <th data-priority="2">Equipamento</th>
+                        <th>Fabricante</th>
+                        <th>Modelo</th>
+                        <th>Nº Série</th>
+                        <th>Nº Patrimônio</th>
+                        <th>Status</th>
+                        <th class="actions">Ações</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
     {% endblock %}
