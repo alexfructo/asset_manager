@@ -9,22 +9,43 @@
 <div class="card mb-4">
     <div class="card-body">
         <div class="card-body">
-            <table id="assets" class="table table-hover display responsive nowrap" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th data-priority="1">Unidade</th>
-                        <th>Setor</th>
-                        <th>Localização</th>
-                        <th data-priority="2">Equipamento</th>
-                        <th>Fabricante</th>
-                        <th>Modelo</th>
-                        <th>Nº Série</th>
-                        <th>Nº Patrimônio</th>
-                        <th>Status</th>
-                        <th class="actions">Ações</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="row">
+                <div class="col-my-2">
+                    <a href="{% url 'core:asset_register' %}" class="btn btn-success">Cadastrar</a>
+                    <button type="button" class="btn btn-secondary">Filtrar</button>
+                    <div class="btn-group">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Exportar
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">PDF</a>
+                            <a class="dropdown-item" href="#">XLS</a>
+                            <a class="dropdown-item" href="#">CSV</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col my-2">
+                    <table id="assets" class="table table-hover display responsive nowrap" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">Unidade</th>
+                                <th>Setor</th>
+                                <th>Localização</th>
+                                <th data-priority="2">Equipamento</th>
+                                <th>Fabricante</th>
+                                <th>Modelo</th>
+                                <th>Nº Série</th>
+                                <th>Nº Patrimônio</th>
+                                <th>Status</th>
+                                <th class="actions">Ações</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     {% endblock %}

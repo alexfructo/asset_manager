@@ -6,8 +6,7 @@
 <div class="row mb-4">
     <h2 class="col text-left mr-1">Equipamento</h2>
     <div class="col text-right ml-1">
-        <a id="back" href="#" class="btn btn-icon btn-pill btn-primary" data-toggle='tooltip'
-            title='Voltar'>
+        <a id="back" href="#" class="btn btn-icon btn-pill btn-primary" data-toggle='tooltip' title='Voltar'>
             <i class='fa fa-fw fa-arrow-left'></i>
         </a>
     </div>
@@ -15,7 +14,7 @@
 <div class="card mb-4">
     <div class="card-header bg-white font-weight-bold">Formulário de Cadastro</div>
     <div class="card-body">
-        <form id="form" method="POST">
+        <form id="form" method="POST" action="{% url 'core:asset_edit' form.codigo.value %}">
             <fieldset>
                 <div class="row">
                     <div class="form-group col-md-2">
@@ -29,8 +28,8 @@
                         <div class="input-group">
                             {% render_field form.localizacao class="form-control form-sm" placeholder=form.localizacao.label %}
                             <div class="input-group-append">
-                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Unidade" href="#"><i
-                                        class='fa fa-fw fa-plus'></i></a>
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Unidade"
+                                    href="#"><i class='fa fa-fw fa-plus'></i></a>
                             </div>
                         </div>
                     </div>
@@ -41,8 +40,8 @@
                         <div class="input-group">
                             {% render_field form.setor class="form-control form-sm" placeholder=form.setor.label %}
                             <div class="input-group-append">
-                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Setor" href="#"><i
-                                        class='fa fa-fw fa-plus'></i></a>
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Setor"
+                                    href="#"><i class='fa fa-fw fa-plus'></i></a>
                             </div>
                         </div>
                     </div>
@@ -53,8 +52,8 @@
                         <div class="input-group">
                             {% render_field form.grupo class="form-control form-sm" placeholder=form.grupo.label %}
                             <div class="input-group-append">
-                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Localização" href="#"><i
-                                        class='fa fa-fw fa-plus'></i></a>
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Localização"
+                                    href="#"><i class='fa fa-fw fa-plus'></i></a>
                             </div>
                         </div>
                     </div>
@@ -65,8 +64,8 @@
                         <div class="input-group">
                             {% render_field form.categoria class="form-control form-sm" placeholder=form.categoria.label %}
                             <div class="input-group-append">
-                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Categoria" href="#"><i
-                                        class='fa fa-fw fa-plus'></i></a>
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Categoria"
+                                    href="#"><i class='fa fa-fw fa-plus'></i></a>
                             </div>
                         </div>
                     </div>
@@ -77,8 +76,8 @@
                         <div class="input-group">
                             {% render_field form.fabricante class="form-control form-sm" placeholder=form.fabricante.label %}
                             <div class="input-group-append">
-                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Fabricante" href="#"><i
-                                        class='fa fa-fw fa-plus'></i></a>
+                                <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Fabricante"
+                                    href="#"><i class='fa fa-fw fa-plus'></i></a>
                             </div>
                         </div>
                     </div>
@@ -114,8 +113,9 @@
                     </div>
                 </div>
                 <div class="box-actions">
-                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                    <a class="btn btn-danger" href="{% url 'core:asset_view' form.codigo.value %}">Cancelar</a>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
+                    <button type="button" class="btn btn-primary"><i class="fa fa-clone"></i> Clonar</button>
+                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Remover</button>
                 </div>
             </fieldset>
         </form>
@@ -126,9 +126,27 @@
 <script>
     $(document).ready(function () {
 
-        $('#form').submit(function(event){
-           event.preventDefault();
-           console.info('teste') 
+        $('#form').submit(function (event) {
+            event.preventDefault();
+            var form = $('#form');
+            $.ajax({
+                dataType: "html",
+                type: "POST",
+                url: form.attr('action'),
+                data: form.serialize(),
+                beforeSend: function () {
+                    console.info("Enviando dados...");
+                },
+                complete: function () {
+                    console.info("Dados enviados!");
+                },
+                success: function (data, textStatus) {
+                    console.info(data + textStatus);
+                },
+                error: function (xhr, er) {
+                    console.error(xhr + er);
+                }
+            });
         });
 
         $('#back').click(function (event) {
