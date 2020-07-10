@@ -25,8 +25,9 @@
                                 <div class="input-group">
                                     {% render_field form.localizacao class="form-control form-sm" placeholder=form.localizacao.label %}
                                     <div class="input-group-append">
-                                        <a class="btn btn-outline-success" data-toggle="tooltip"
-                                            title="Cadastrar Unidade" href="#"><i class='fa fa-fw fa-plus'></i></a>
+                                        <a href="#" class="btn btn-outline-success" data-toggle="modal"
+                                            data-target="#unidadeModal"><i class='fa fa-fw fa-plus'
+                                                data-toggle="tooltip" title="Cadastrar Unidade"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -37,8 +38,8 @@
                                 <div class="input-group">
                                     {% render_field form.setor class="form-control form-sm" placeholder=form.setor.label %}
                                     <div class="input-group-append">
-                                        <a class="btn btn-outline-success" data-toggle="tooltip" title="Cadastrar Setor"
-                                            href="#"><i class='fa fa-fw fa-plus'></i></a>
+                                        <a class="btn btn-outline-success" data-toggle="modal"
+                                        data-target="#setorModal" href="#"><i data-toggle="tooltip" title="Cadastrar Setor" class='fa fa-fw fa-plus'></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -49,8 +50,9 @@
                                 <div class="input-group">
                                     {% render_field form.grupo class="form-control form-sm" placeholder=form.grupo.label %}
                                     <div class="input-group-append">
-                                        <a class="btn btn-outline-success" data-toggle="tooltip"
-                                            title="Cadastrar Localização" href="#"><i class='fa fa-fw fa-plus'></i></a>
+                                        <a class="btn btn-outline-success" data-toggle="modal"
+                                        data-target="#localizacaoModal" href="#"><i data-toggle="tooltip"
+                                        title="Cadastrar Localização" class='fa fa-fw fa-plus'></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -61,8 +63,9 @@
                                 <div class="input-group">
                                     {% render_field form.categoria class="form-control form-sm" placeholder=form.categoria.label %}
                                     <div class="input-group-append">
-                                        <a class="btn btn-outline-success" data-toggle="tooltip"
-                                            title="Cadastrar Categoria" href="#"><i class='fa fa-fw fa-plus'></i></a>
+                                        <a class="btn btn-outline-success" data-toggle="modal"
+                                        data-target="#localizacaoModal" href="#"><i data-toggle="tooltip"
+                                        title="Cadastrar Categoria" class='fa fa-fw fa-plus'></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -73,8 +76,9 @@
                                 <div class="input-group">
                                     {% render_field form.fabricante class="form-control form-sm" placeholder=form.fabricante.label %}
                                     <div class="input-group-append">
-                                        <a class="btn btn-outline-success" data-toggle="tooltip"
-                                            title="Cadastrar Fabricante" href="#"><i class='fa fa-fw fa-plus'></i></a>
+                                        <a class="btn btn-outline-success" data-toggle="modal"
+                                        data-target="#fabricanteModal" href="#"><i data-toggle="tooltip"
+                                        title="Cadastrar Fabricante" class='fa fa-fw fa-plus'></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -114,6 +118,152 @@
                         </div>
                     </fieldset>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Unidade -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="unidadeModal"
+    aria-labelledby="unidadeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrar Unidade</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post" id="CadastroUnidade">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control form-control-sm" type="text" name="nome_unidade"
+                                id="nome_unidade" placeholder="Nome da unidade">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm  btn-success">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Setor -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="setorModal"
+    aria-labelledby="setorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrar Setor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post" id="CadastroSetor">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control form-control-sm" type="text" name="nome_setor"
+                                id="nome_setor" placeholder="Nome de setor">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm  btn-success">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Localização -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="localizacaoModal"
+    aria-labelledby="localizacaoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrar Localização</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post" id="CadastroLocalizacao">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control form-control-sm" type="text" name="nome_localizacao"
+                                id="nome_localizacao" placeholder="Nome da Localização">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm  btn-success">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Categoria -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="categoriaModal"
+    aria-labelledby="categoriaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrar Categoria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post" id="CadastroCategoria">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control form-control-sm" type="text" name="nome_categoria"
+                                id="nome_categoria" placeholder="Nome da Categoria">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm  btn-success">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Fabricante -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="fabricanteModal"
+    aria-labelledby="fabricanteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrar Fabricante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post" id="CadastroFabricante">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control form-control-sm" type="text" name="nome_fabricante"
+                                id="nome_fabricante" placeholder="Nome do Fabricante">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-sm  btn-success">Salvar</button>
             </div>
         </div>
     </div>
