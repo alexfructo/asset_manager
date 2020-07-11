@@ -8,48 +8,127 @@
 <h2 class="mb-4">Equipamentos</h2>
 <div class="card mb-4">
     <div class="card-body">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-my-2">
-                    <a href="{% url 'core:asset_register' %}" class="btn btn-success">Cadastrar</a>
-                    <button type="button" class="btn btn-secondary">Filtrar</button>
-                    <div class="btn-group">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Exportar
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">PDF</a>
-                            <a class="dropdown-item" href="#">XLS</a>
-                            <a class="dropdown-item" href="#">CSV</a>
-                        </div>
+        <div class="row">
+            <div class="col my-2">
+                <a href="{% url 'core:asset_register' %}" class="btn btn-success">Cadastrar</a>
+                <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFiltros"
+                    aria-expanded="false" aria-controls="collapseFiltros">Filtros</button>
+                <div class="btn-group">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Exportar
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">PDF</a>
+                        <a class="dropdown-item" href="#">XLS</a>
+                        <a class="dropdown-item" href="#">CSV</a>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col my-2">
-                    <table id="assets" class="table table-hover display responsive nowrap" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th data-priority="1">Unidade</th>
-                                <th>Setor</th>
-                                <th>Localização</th>
-                                <th data-priority="2">Equipamento</th>
-                                <th>Fabricante</th>
-                                <th>Modelo</th>
-                                <th>Nº Série</th>
-                                <th>Nº Patrimônio</th>
-                                <th>Status</th>
-                                <th class="actions">Ações</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+        </div>
+        <div id="collapseFiltros" class="row mt-4 mx-md-1 justify-content-center collapse">
+            <div class="col shadow py-2 border mb-5">
+                <form class="mt-3 px-3" id="filtro">
+                    {% csrf_token %}
+                    <h5 class="mb-4">Filtrar por</h5>
+                    <fieldset>
+                        <div class="row align-self-center">
+                            <div class="form-group col-xs-3 px-3">
+                                <label for="unidade" class="control-label">Unidade</label>
+                                <select name="unidade" id="unidade" class="form-control">
+                                    <option value="" selected>Todos</option>
+                                    {% if localizacao %}
+                                    {% for item in localizacao %}
+                                    <option value="{{ item.codigo }}"> {{ item.nome }} </option>
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-3 px-3">
+                                <label for="setor" class="label-control">Setor</label>
+                                <select name="setor" id="setor" class="form-control">
+                                    <option value="" selected>Todos</option>
+                                    {% if setor %}
+                                    {% for item in setor %}
+                                    <option value="{{ item.codigo }}"> {{ item.nome }} </option>
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-3 px-3">
+                                <label for="localizacao" class="label-control">Localização</label>
+                                <select name="localizacao" id="localizacao" class="form-control">
+                                    <option value="" selected>Todos</option>
+                                    {% if grupo %}
+                                    {% for item in grupo %}
+                                    <option value="{{ item.codigo }}"> {{ item.nome }} </option>
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-3 px-3">
+                                <label for="equipamento" class="label-control">Equipamento</label>
+                                <select name="equipamento" id="equipamento" class="form-control">
+                                    <option value="" selected>Todos</option>
+                                    {% if categoria %}
+                                    {% for item in categoria %}
+                                    <option value="{{ item.codigo }}"> {{ item.nome }} </option>
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-3 px-3">
+                                <label for="equipamento" class="label-control">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="" selected>Todos</option>
+                                    <option value="0">Armazenado</option>
+                                    <option value="1">Alocado</option>
+                                    <option value="2">Descartado</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-xs-3 px-3 align-self-end">
+                                <button class="btn btn-md btn-primary" type="submit"><i class="fa fa-filter"></i>
+                                    Filtrar</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col my-2">
+                <table id="assets" class="table table-hover display responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th data-priority="1">Unidade</th>
+                            <th>Setor</th>
+                            <th>Localização</th>
+                            <th data-priority="2">Equipamento</th>
+                            <th>Fabricante</th>
+                            <th>Modelo</th>
+                            <th>Nº Série</th>
+                            <th>Nº Patrimônio</th>
+                            <th>Status</th>
+                            <th class="actions">Ações</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
-    {% endblock %}
-    {% block javascript %}
-    <script src="{% static 'js/datatables.min.js' %}"></script>
-    <script src="{% static 'js/assets.js' %}"></script>
-    {% endblock %}
+</div>
+{% endblock %}
+{% block javascript %}
+<script src="{% static 'js/datatables.min.js' %}"></script>
+<script src="{% static 'js/assets.js' %}"></script>
+<script>
+   $(document).ready(function(){
+    var table = getData();
+
+    $("#filtro").submit(function(event){
+        event.preventDefault();
+        table.ajax.reload();
+    });
+   });
+</script>
+{% endblock %}
