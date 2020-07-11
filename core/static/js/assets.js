@@ -1,6 +1,18 @@
-$(document).ready(function () {
-    $('#assets').DataTable({
-        "ajax": "/equipamentos/listar/json",
+
+function getData(filter, _callback) {
+    return $('#assets').DataTable({
+        "ajax": {
+            "url": "/equipamentos/listar/json",
+            "type": "POST",
+            "data": {
+                "localizacao": function() { return $('#unidade').val() },
+                "setor": function() { return $('#setor').val() },
+                "grupo": function() { return $('#localizacao').val() },
+                "categoria": function() { return $('#equipamento').val() },
+                "status": function() { return $('#status').val() },
+                "csrfmiddlewaretoken": function() { return $("input[name='csrfmiddlewaretoken']").val() },
+            }
+        },
         responsive: true,
         "bLengthChange": false,
         columnDefs: [
@@ -22,11 +34,12 @@ $(document).ready(function () {
             { "data": "status" },
             {
                 "data": "codigo",
-                "render": function (data,) {
+                "render": function (data, ) {
                     result = "<a href='/equipamento/editar/" + data + "' class='btn btn-icon btn-pill btn-primary btn-sm' data-toggle='tooltip' title='Editar'><i class='fa fa-fw fa-edit'></i> </a> <a href='/equipamento/remover/" + data + "' class='btn btn-icon btn-pill btn-danger btn-sm' data-toggle='tooltip' title='Remover'> <i class='fa fa-fw fa-trash'></i></a>";
                     return result
                 }
             }
         ]
     });
-}); 
+    _callback();
+}
