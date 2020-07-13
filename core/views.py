@@ -41,6 +41,7 @@ def error_404(request, message):
 
 @login_required()
 def assets(request):
+    form = EquipamentoForm()
     localizacao = Localizacao.objects.all()
     setor = Setor.objects.all()
     grupo = Grupo.objects.all()
@@ -52,6 +53,7 @@ def assets(request):
         "grupo": grupo,
         "categoria": categoria,
         "fabricante": fabricante,
+        "form": form,
     }
     return render(request, 'assets.html', context)
 
@@ -70,6 +72,9 @@ def assets_list_as_json(request):
         if request.POST.get('categoria'):
             equipamentos = equipamentos.filter(
                 categoria=request.POST.get('categoria'))
+        if request.POST.get('fabricante'):
+            equipamentos = equipamentos.filter(
+                fabricante=request.POST.get('fabricante'))
         if request.POST.get('status'):
             equipamentos = equipamentos.filter(
                 status=request.POST.get('status'))
