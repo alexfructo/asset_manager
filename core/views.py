@@ -60,24 +60,26 @@ def assets(request):
 
 @login_required()
 def assets_list_as_json(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         equipamentos = Equipamento.objects.all()
-        if request.POST.get('localizacao'):
+        if request.GET.get('localizacao', False):
             equipamentos = equipamentos.filter(
-                localizacao=request.POST.get('localizacao'))
-        if request.POST.get('setor'):
-            equipamentos = equipamentos.filter(setor=request.POST.get('setor'))
-        if request.POST.get('grupo'):
-            equipamentos = equipamentos.filter(grupo=request.POST.get('grupo'))
-        if request.POST.get('categoria'):
+                localizacao=request.GET.get('localizacao', False))
+        if request.GET.get('setor', False):
             equipamentos = equipamentos.filter(
-                categoria=request.POST.get('categoria'))
-        if request.POST.get('fabricante'):
+                setor=request.GET.get('setor', False))
+        if request.GET.get('grupo', False):
             equipamentos = equipamentos.filter(
-                fabricante=request.POST.get('fabricante'))
-        if request.POST.get('status'):
+                grupo=request.GET.get('grupo', False))
+        if request.GET.get('categoria', False):
             equipamentos = equipamentos.filter(
-                status=request.POST.get('status'))
+                categoria=request.GET.get('categoria', False))
+        if request.GET.get('fabricante', False):
+            equipamentos = equipamentos.filter(
+                fabricante=request.GET.get('fabricante', False))
+        if request.GET.get('status', False):
+            equipamentos = equipamentos.filter(
+                status=request.GET.get('status', False))
 
         data = [equipamento.listar_json() for equipamento in equipamentos]
         response = {'data': data}
