@@ -92,16 +92,23 @@ def assets_list_as_json(request):
 
 
 @login_required()
-def asset_register(request):
-    form = EquipamentoForm(request.POST or None)
-    if request.method == 'POST':
+def asset_register_ajax(request):
+    if request.method == 'POST' and request.is_ajax():
+        form = EquipamentoForm(request.POST or None)
+        form.fields["usuario"] = request.user
         if form.is_valid():
-            codigo = form.cleaned_data['codigo']
-            form.save()
-            message = 'Cadastro realizado com sucesso!'
-            return redirect(asset_edit(request, codigo=codigo, message=message))
-    return render(request, 'asset_register.html', {"form": form})
-
+            data = {
+                "success": True,
+                "message":"Cadastro realizado com sucesso.",
+            }
+            JsonResponse(data, status=200)
+        else:
+            data = {
+                "success": False,
+                "message": dict(form.errors.items()),
+            }
+            return JsonResponse(data, status=200)
+                
 
 @login_required()
 def asset_edit(request, codigo, message=None):

@@ -144,7 +144,7 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col px-4 my-2">
-                        <form action="" method="post" id="cadastroForm">
+                        <form action="{% url 'core:asset_register_ajax' %}" method="post" id="cadastroForm">
                             <fieldset>
                                 <div class="row">
                                     <div class="col-md-4 form-group">
@@ -199,7 +199,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>
                     Cancelar</button>
-                <button type="button" class="btn btn-success"><i class="fa fa-save"></i> Salvar</button>
+                <button id="cadastroSalvar" type="button" class="btn btn-success"><i class="fa fa-save"></i>
+                    Salvar</button>
             </div>
         </div>
     </div>
@@ -241,7 +242,31 @@
             $("#{{ form.status.auto_id}}").selectpicker("refresh");
         });
 
+        $("#cadastroSalvar").click(function () {
+            $.ajax({
+                url: "{% url 'core:asset_register_ajax' %}",
+                type: "POST",
+                data: {
+                    "csrfmiddlewaretoken": "{{ csrf_token }}",
+                    "{{ form.localizacao.name }}": function () { return $("#{{ form.localizacao.auto_id}}").val() },
+                    "{{ form.setor.name }}": function () { return $("#{{ form.setor.auto_id}}").val() },
+                    "{{ form.grupo.name }}": function () { return $("#{{ form.grupo.auto_id}}").val() },
+                    "{{ form.categoria.name }}": function () { return $("#{{ form.categoria.auto_id}}").val() },
+                    "{{ form.fabricante.name }}": function () { return $("#{{ form.fabricante.auto_id}}").val() },
+                    "{{ form.status.name }}": function () { return $("#{{ form.status.auto_id}}").val() },
+                    "{{ form.numero_serie.name }}": function () { return $("#{{ form.numero_serie.auto_id}}").val() },
+                    "{{ form.numero_patrimonio.name }}": function () { return $("#{{ form.numero_patrimonio.auto_id}}").val() },
+                    "{{ form.observacoes.name }}": function () { return $("#{{ form.observacoes.auto_id}}").val() },
+                },
+                success: function (json) {
+                    console.log(json);
+                },
+                error: function (xhr, errmsg, err) {
+                    console.warn(`${xhr.status} ${xhr.responseText}`);
+                }
+            });
+        });
     });
-        
+
 </script>
 {% endblock %}

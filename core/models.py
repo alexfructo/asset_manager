@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Localizacao(models.Model):
-    codigo = models.IntegerField(primary_key=True)
+    codigo = models.AutoField(primary_key=True)
     criado_em = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modificado_em = models.DateTimeField(auto_now=True, null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -17,7 +17,7 @@ class Localizacao(models.Model):
         return self.nome
 
 class Setor(models.Model):
-    codigo = models.IntegerField(primary_key=True)
+    codigo = models.AutoField(primary_key=True)
     criado_em = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modificado_em = models.DateTimeField(auto_now=True, null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -32,7 +32,7 @@ class Setor(models.Model):
         return self.nome
 
 class Grupo(models.Model):
-    codigo = models.IntegerField(primary_key=True)
+    codigo = models.AutoField(primary_key=True)
     criado_em = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modificado_em = models.DateTimeField(auto_now=True, null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -47,7 +47,7 @@ class Grupo(models.Model):
         return self.nome
 
 class Categoria(models.Model):
-    codigo = models.IntegerField(primary_key=True)
+    codigo = models.AutoField(primary_key=True)
     criado_em = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modificado_em = models.DateTimeField(auto_now=True, null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -62,7 +62,7 @@ class Categoria(models.Model):
         return self.nome
 
 class Fabricante(models.Model):
-    codigo = models.IntegerField(primary_key=True)
+    codigo = models.AutoField(primary_key=True)
     criado_em = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modificado_em = models.DateTimeField(auto_now=True, null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -77,7 +77,7 @@ class Fabricante(models.Model):
         return self.nome
 
 class Equipamento(models.Model):
-    codigo = models.IntegerField(primary_key=True)
+    codigo = models.AutoField(primary_key=True)
     criado_em = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modificado_em = models.DateTimeField(auto_now=True, null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
