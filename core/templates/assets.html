@@ -136,7 +136,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cadastroModalLabel">Equipamento - Novo Item</h5>
+                <h5 class="modal-title" id="cadastroModalLabel"><i class="fa fa-plus"></i> Equipamento / Novo Item</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -233,10 +233,15 @@
 
         $('#cadastroModal').on('hidden.bs.modal', function () {
             $("#cadastroForm").trigger("reset");
-            $("select").each(function () {
-                $(this).val($("#" + $(this).attr("id") + " option:first").val());
-            });
+            $("#{{ form.localizacao.auto_id}}").selectpicker("refresh");
+            $("#{{ form.setor.auto_id}}").selectpicker("refresh");
+            $("#{{ form.grupo.auto_id}}").selectpicker("refresh");
+            $("#{{ form.categoria.auto_id}}").selectpicker("refresh");
+            $("#{{ form.fabricante.auto_id}}").selectpicker("refresh");
+            $("#{{ form.status.auto_id}}").selectpicker("refresh");
         });
+
     });
+        
 </script>
 {% endblock %}
