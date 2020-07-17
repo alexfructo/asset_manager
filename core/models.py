@@ -84,7 +84,7 @@ class Equipamento(models.Model):
     localizacao = models.ForeignKey('Localizacao', on_delete=models.PROTECT, null=True, blank=True)
     setor = models.ForeignKey('Setor', on_delete=models.PROTECT, null=True, blank=True)
     grupo = models.ForeignKey('Grupo', on_delete=models.PROTECT, null=True, blank=True)
-    categoria = models.ForeignKey('Categoria', on_delete=models.PROTECT, null=True, blank=True)
+    categoria = models.ForeignKey('Categoria', on_delete=models.PROTECT, null=False, blank=False)
     fabricante = models.ForeignKey('Fabricante', on_delete=models.PROTECT, null=True, blank=True)
     modelo = models.CharField(max_length=100, null=True, blank=True)
     numero_serie = models.CharField(max_length=32, null=True, blank=True)

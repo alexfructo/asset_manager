@@ -27,6 +27,7 @@ class LoginForm(forms.Form):
 class EquipamentoForm(forms.ModelForm):
     class Meta:
         model = Equipamento
+        exclude = ["usuario"]
         fields = '__all__'
         widgets = {
             'observacoes': forms.Textarea(attrs={'rows': 5}),
@@ -34,6 +35,7 @@ class EquipamentoForm(forms.ModelForm):
         labels = {
             'codigo': 'Código',
             'localizacao': 'Unidade',
+            'categoria': 'Equipamento',
             'grupo': 'Localização',
             'numero_serie': 'Nº de Série',
             'numero_patrimonio': 'Nº de Patrimônio',

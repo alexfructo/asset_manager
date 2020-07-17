@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core import serializers
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, EquipamentoForm
 from .models import Equipamento, Localizacao, Setor, Grupo, Categoria, Fabricante
@@ -95,13 +96,14 @@ def assets_list_as_json(request):
 def asset_register_ajax(request):
     if request.method == 'POST' and request.is_ajax():
         form = EquipamentoForm(request.POST or None)
-        form.fields["usuario"] = request.user
         if form.is_valid():
+            form.save(commit=False)
+            form.usuario = User.objects.get(id=request.user.id)
             data = {
                 "success": True,
                 "message":"Cadastro realizado com sucesso.",
             }
-            JsonResponse(data, status=200)
+            return JsonResponse(data, status=200)
         else:
             data = {
                 "success": False,
