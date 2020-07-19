@@ -37,8 +37,8 @@
                     <fieldset>
                         <div class="row align-self-center">
                             <div class="form-group col-xs-3 px-3">
-                                <label for="unidade" class="control-label"><strong>Unidade</strong></label>
-                                <select name="unidade" id="unidade" class="form-control">
+                                <label for="localizacao_filtro" class="control-label"><strong>Unidade</strong></label>
+                                <select name="localizacao_filtro" id="localizacao_filtro" class="form-control">
                                     <option value="" selected>Todos</option>
                                     {% if localizacao %}
                                     {% for item in localizacao %}
@@ -48,8 +48,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-3 px-3">
-                                <label for="setor" class="label-control"><strong>Setor</strong></label>
-                                <select name="setor" id="setor" class="form-control">
+                                <label for="setor_filtro" class="label-control"><strong>Setor</strong></label>
+                                <select name="setor_filtro" id="setor_filtro" class="form-control">
                                     <option value="" selected>Todos</option>
                                     {% if setor %}
                                     {% for item in setor %}
@@ -59,8 +59,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-3 px-3">
-                                <label for="localizacao" class="label-control"><strong>Localização</strong></label>
-                                <select name="localizacao" id="localizacao" class="form-control">
+                                <label for="grupo_filtro" class="label-control"><strong>Localização</strong></label>
+                                <select name="grupo_filtro" id="grupo_filtro" class="form-control">
                                     <option value="" selected>Todos</option>
                                     {% if grupo %}
                                     {% for item in grupo %}
@@ -70,8 +70,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-3 px-3">
-                                <label for="equipamento" class="label-control"><strong>Equipamento</strong></label>
-                                <select name="equipamento" id="equipamento" class="form-control">
+                                <label for="categoria_filtro" class="label-control"><strong>Equipamento</strong></label>
+                                <select name="categoria_filtro" id="categoria_filtro" class="form-control">
                                     <option value="" selected>Todos</option>
                                     {% if categoria %}
                                     {% for item in categoria %}
@@ -81,8 +81,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-3 px-3">
-                                <label for="fabricante" class="label-control"><strong>Fabricante</strong></label>
-                                <select name="fabricante" id="fabricante" class="form-control">
+                                <label for="fabricante_filtro" class="label-control"><strong>Fabricante</strong></label>
+                                <select name="fabricante_filtro" id="fabricante_filtro" class="form-control">
                                     <option value="" selected>Todos</option>
                                     {% if fabricante %}
                                     {% for item in fabricante %}
@@ -92,8 +92,8 @@
                                 </select>
                             </div>
                             <div class="form-group col-xs-3 px-3">
-                                <label for="equipamento" class="label-control"><strong>Status</strong></label>
-                                <select name="status" id="status" class="form-control">
+                                <label for="status_filtro" class="label-control"><strong>Status</strong></label>
+                                <select name="status_filtro" id="status_filtro" class="form-control">
                                     <option value="" selected>Todos</option>
                                     <option value="0">Armazenado</option>
                                     <option value="1">Alocado</option>
@@ -143,53 +143,63 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
-                    <div class="col px-4 my-2">
+                    <div class="col px-3 my-2">
                         <div id="cadastroFormResult"></div>
                         <form action="{% url 'core:asset_register_ajax' %}" method="post" id="cadastroForm">
-                            <fieldset>
+                            <fieldset class="px-3">
+                                {% csrf_token %}
                                 <div class="row">
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.localizacao.auto_id}}">{{form.localizacao.label}}</label>
                                         {% render_field form.localizacao data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.localizacao.label %}
+                                        <p id="{{form.localizacao.name}}"></p>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.setor.auto_id}}">{{form.setor.label}}</label>
                                         {% render_field form.setor data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.setor.label %}
+                                        <div id="{{form.setor.name}}"></div>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.grupo.auto_id}}">{{form.grupo.label}}</label>
                                         {% render_field form.grupo data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.grupo.label %}
+                                        <div id="{{form.grupo.name}}"></div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.categoria.auto_id}}">{{form.categoria.label}}</label>
                                         {% render_field form.categoria data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.categoria.label %}
+                                        <div id="{{form.categoria.name}}"></div>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.fabricante.auto_id}}">{{form.fabricante.label}}</label>
                                         {% render_field form.fabricante data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.fabricante.label %}
+                                        <div id="{{form.fabricante.name}}"></div>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.status.auto_id}}">{{form.status.label}}</label>
                                         {% render_field form.status data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.status.label %}
+                                        <div id="{{form.status.name}}"></div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.numero_serie.auto_id}}">{{form.numero_serie.label}}</label>
                                         {% render_field form.numero_serie class="form-control border-secondary" placeholder=form.numero_serie.label %}
+                                        <div id="{{form.localizacao.name}}"></div>
                                     </div>
-                                    <div class="col-md-4 form-group">
+                                    <div class="col-md-4 form-group" id="{{form.numero_patrimonio.name}}">
                                         <label
                                             for="{{form.numero_patrimonio.auto_id}}">{{form.numero_patrimonio.label}}</label>
                                         {% render_field form.numero_patrimonio class="form-control border-secondary" placeholder=form.numero_patrimonio.label %}
+                                        <div id="{{form.localizacao.name}}"></div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col" id="{{form.observacoes.name}}">
                                         <label for="{{form.observacoes.auto_id}}">{{form.observacoes.label}}</label>
                                         {% render_field form.observacoes class="form-control border-secondary" placeholder=form.observacoes.label %}
+                                        <div id="{{form.localizacao.name}}"></div>
                                     </div>
                                 </div>
                             </fieldset>
@@ -212,16 +222,6 @@
 <script src="{% static 'js/assets.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script>
-    function formCadastroLimpar() {
-        $("#cadastroForm").trigger("reset");
-        $("#{{ form.localizacao.auto_id}}").selectpicker("refresh");
-        $("#{{ form.setor.auto_id}}").selectpicker("refresh");
-        $("#{{ form.grupo.auto_id}}").selectpicker("refresh");
-        $("#{{ form.categoria.auto_id}}").selectpicker("refresh");
-        $("#{{ form.fabricante.auto_id}}").selectpicker("refresh");
-        $("#{{ form.status.auto_id}}").selectpicker("refresh");
-        $("#cadastroFormResult").html("");
-    }
 
     $(document).ready(function () {
 
@@ -249,73 +249,19 @@
         });
 
         $("#cadastroSalvar").click(function () {
-            $.ajax({
-                url: "{% url 'core:asset_register_ajax' %}",
-                type: "POST",
-                data: {
-                    "csrfmiddlewaretoken": "{{ csrf_token }}",
-                    "{{ form.localizacao.name }}": function () { return $("#{{ form.localizacao.auto_id}}").val() },
-                    "{{ form.setor.name }}": function () { return $("#{{ form.setor.auto_id}}").val() },
-                    "{{ form.grupo.name }}": function () { return $("#{{ form.grupo.auto_id}}").val() },
-                    "{{ form.categoria.name }}": function () { return $("#{{ form.categoria.auto_id}}").val() },
-                    "{{ form.fabricante.name }}": function () { return $("#{{ form.fabricante.auto_id}}").val() },
-                    "{{ form.status.name }}": function () { return $("#{{ form.status.auto_id}}").val() },
-                    "{{ form.numero_serie.name }}": function () { return $("#{{ form.numero_serie.auto_id}}").val() },
-                    "{{ form.numero_patrimonio.name }}": function () { return $("#{{ form.numero_patrimonio.auto_id}}").val() },
-                    "{{ form.observacoes.name }}": function () { return $("#{{ form.observacoes.auto_id}}").val() },
-                },
-                beforeSend: function () {
-                    $("#cadastroSalvar").html('<i class="fa fa-spinner" aria-hidden="true"></i> Aguarde...');
-                    $('#cadastroSalvar').prop('disabled', true);
-                },
-                success: function (data) {
-                    if (data.success == true) {
-                        formCadastroLimpar();
-                        table.ajax.reload();
-                        alert_class = "alert-success";
-                        alert_message = "Cadastro realizado com sucesso!";
-                    }
-                    else {
-                        alert_class = "alert-danger";
-                        alert_message = "Foram encontrados erros no formulário, por favor verifique os campos em vermelho.";
-                    }
-                    $("#cadastroFormResult").html(`<div class="row justify-content-center align-items-center">
-                    <div class="col-md-10 mb-3">
-                        <div class="alert ${alert_class} alert-dismissible text-center" role="alert">
-                            <ul class='list-unstyled p-0 m-0'>
-                                <li>${alert_message}</li>
-                            </ul>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>`);
-                },
-                error: function (xhr, errmsg, err) {
-                    console.warn(`${xhr.status}`);
-                    $("#cadastroFormResult").html(`<div class="row justify-content-center align-items-center">
-                    <div class="col-md-10 mb-3">
-                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
-                            <ul class='list-unstyled p-0 m-0'>
-                                <li>Não foi possível processar a requisição, tente novamente.</li>
-                            </ul>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>`);
-                },
-                complete: function () {
-                    $("#cadastroSalvar").html("Salvar");
-                    $('#cadastroSalvar').prop('disabled', false);
-                }
+            cadastroSalvar(function() {
+                table.ajax.reload();
             });
         });
 
+        $("#{{form.localizacao.auto_id}}").change(function () {
+            $("#{{form.localizacao.name}}").html("");
+        });
         $("#{{form.categoria.auto_id}}").change(function () {
-            $("#{{form.categoria.auto_id}}")
+            $("#{{form.categoria.name}}").html("");
+        });
+        $("#{{form.status.auto_id}}").change(function () {
+            $("#{{form.status.name}}").html("");
         });
     });
 

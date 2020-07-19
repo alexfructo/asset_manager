@@ -99,6 +99,7 @@ def asset_register_ajax(request):
         if form.is_valid():
             form.save(commit=False)
             form.usuario = User.objects.get(id=request.user.id)
+            form.save()
             data = {
                 "success": True,
                 "message":"Cadastro realizado com sucesso.",
