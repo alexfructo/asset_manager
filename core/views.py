@@ -97,9 +97,19 @@ def asset_register_ajax(request):
     if request.method == 'POST' and request.is_ajax():
         form = EquipamentoForm(request.POST or None)
         if form.is_valid():
-            form.save(commit=False)
-            form.usuario = User.objects.get(id=request.user.id)
-            form.save()
+            equipamento = Equipamento(
+                usuario = request.user,
+                localizacao = form.cleaned_data['localizacao'],
+                grupo = form.cleaned_data['grupo'],
+                setor = form.cleaned_data['setor'],
+                categoria = form.cleaned_data['categoria'],
+                fabricante = form.cleaned_data['fabricante'],
+                status = form.cleaned_data['status'],
+                numero_serie = form.cleaned_data['numero_serie'],
+                numero_patrimonio = form.cleaned_data['numero_patrimonio'],
+                observacoes = form.cleaned_data['observacoes'],
+            )
+            equipamento.save()
             data = {
                 "success": True,
                 "message":"Cadastro realizado com sucesso.",

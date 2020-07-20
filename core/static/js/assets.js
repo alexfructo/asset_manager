@@ -110,6 +110,7 @@ function cadastroSalvar() {
         complete: function () {
             $("#cadastroSalvar").html("Salvar");
             $('#cadastroSalvar').prop('disabled', false);
+            
         }
     });
 }
@@ -126,4 +127,11 @@ function formCadastroLimpar() {
     $("#localizacao").html("");
     $("#categoria").html("");
     $("#status").html("");
+    $("#setor").html("");
+    $("#grupo").html("");
+    $("#fabricante").html("");
+    $("#modelo").html("");
+    $("#observacoes").html("");
+    $("#numero_patrimonio").html("");
+    $("#numero_serie").html("");
 }

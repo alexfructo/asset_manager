@@ -82,10 +82,10 @@ class Equipamento(models.Model):
     modificado_em = models.DateTimeField(auto_now=True, null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.PROTECT, null=False, blank=False)
     localizacao = models.ForeignKey('Localizacao', on_delete=models.PROTECT, null=False, blank=False)
-    setor = models.ForeignKey('Setor', on_delete=models.PROTECT, null=True, blank=True)
-    grupo = models.ForeignKey('Grupo', on_delete=models.PROTECT, null=True, blank=True)
+    setor = models.ForeignKey('Setor', on_delete=models.PROTECT, null=False, blank=False)
+    grupo = models.ForeignKey('Grupo', on_delete=models.PROTECT, null=False, blank=False)
     categoria = models.ForeignKey('Categoria', on_delete=models.PROTECT, null=False, blank=False)
-    fabricante = models.ForeignKey('Fabricante', on_delete=models.PROTECT, null=True, blank=True)
+    fabricante = models.ForeignKey('Fabricante', on_delete=models.PROTECT, null=False, blank=False)
     modelo = models.CharField(max_length=100, null=True, blank=True)
     numero_serie = models.CharField(max_length=32, null=True, blank=True)
     numero_patrimonio = models.CharField(max_length=32, null=True, blank=True)
@@ -94,7 +94,7 @@ class Equipamento(models.Model):
         (1, 'Alocado'),
         (2, 'Descartado'),
     ]
-    status = models.IntegerField(choices=status_opcoes, default=0, blank=False, null=False)
+    status = models.IntegerField(choices=status_opcoes, default=0, null=False, blank=False)
     observacoes = models.TextField(null=True, blank=True)
 
     class Meta:

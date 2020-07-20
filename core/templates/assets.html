@@ -14,19 +14,20 @@
             <div class="col mt-2 mb-4">
                 <button class="btn btn-md btn-success" type="button" data-toggle="modal" data-target="#cadastroModal"><i
                         class="fa fa-plus"></i> Adicionar Item</button>
+                <button class="btn btn-md btn-primary" type="button" id="atualizarLista"><i class="fa fa-sync"></i>
+                    Atualizar Lista</button>
                 <div class="btn-group">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-download"></i> Exportar
-                    </button>
+                        <i class="fa fa-download"></i> Exportar</button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#" id="pdf">PDF</a>
                         <a class="dropdown-item" href="#" id="xls">XLS</a>
                         <a class="dropdown-item" href="#" id="csv">CSV</a>
                     </div>
                 </div>
-                <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapseFiltros"
-                    aria-expanded="false" aria-controls="collapseFiltros"><i class="fa fa-filter"></i> Filtros</button>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#collapseFiltros"
+                    aria-expanded="false" aria-controls="collapseFiltros"><i class="fa fa-filter"></i> Filtrar</button>
             </div>
         </div>
         <div id="collapseFiltros" class="row mt-4 mx-md-1 justify-content-center collapse">
@@ -188,7 +189,7 @@
                                         {% render_field form.numero_serie class="form-control border-secondary" placeholder=form.numero_serie.label %}
                                         <div id="{{form.localizacao.name}}"></div>
                                     </div>
-                                    <div class="col-md-4 form-group" id="{{form.numero_patrimonio.name}}">
+                                    <div class="col-md-4 form-group">
                                         <label
                                             for="{{form.numero_patrimonio.auto_id}}">{{form.numero_patrimonio.label}}</label>
                                         {% render_field form.numero_patrimonio class="form-control border-secondary" placeholder=form.numero_patrimonio.label %}
@@ -196,7 +197,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col" id="{{form.observacoes.name}}">
+                                    <div class="col">
                                         <label for="{{form.observacoes.auto_id}}">{{form.observacoes.label}}</label>
                                         {% render_field form.observacoes class="form-control border-secondary" placeholder=form.observacoes.label %}
                                         <div id="{{form.localizacao.name}}"></div>
@@ -249,9 +250,11 @@
         });
 
         $("#cadastroSalvar").click(function () {
-            cadastroSalvar(function() {
-                table.ajax.reload();
-            });
+            cadastroSalvar();
+        });
+
+        $("#atualizarLista").click(function () {
+            table.ajax.reload();
         });
 
         $("#{{form.localizacao.auto_id}}").change(function () {
