@@ -3,7 +3,8 @@
 {% load widget_tweaks %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/selectpicker.css' %}">
 {% endblock %}
 {% block title%} - Equipamentos{% endblock %}
 {% block content %}
@@ -152,34 +153,34 @@
                                 <div class="row">
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.localizacao.auto_id}}">{{form.localizacao.label}}</label>
-                                        {% render_field form.localizacao data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.localizacao.label %}
+                                        {% render_field form.localizacao data-size="5" data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.localizacao.label %}
                                         <p id="{{form.localizacao.name}}"></p>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.setor.auto_id}}">{{form.setor.label}}</label>
-                                        {% render_field form.setor data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.setor.label %}
+                                        {% render_field form.setor data-size="5" data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.setor.label %}
                                         <div id="{{form.setor.name}}"></div>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.grupo.auto_id}}">{{form.grupo.label}}</label>
-                                        {% render_field form.grupo data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.grupo.label %}
+                                        {% render_field form.grupo data-size="5" data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.grupo.label %}
                                         <div id="{{form.grupo.name}}"></div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.categoria.auto_id}}">{{form.categoria.label}}</label>
-                                        {% render_field form.categoria data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.categoria.label %}
+                                        {% render_field form.categoria data-size="5" data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.categoria.label %}
                                         <div id="{{form.categoria.name}}"></div>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.fabricante.auto_id}}">{{form.fabricante.label}}</label>
-                                        {% render_field form.fabricante data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.fabricante.label %}
+                                        {% render_field form.fabricante data-size="5" data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.fabricante.label %}
                                         <div id="{{form.fabricante.name}}"></div>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label for="{{form.status.auto_id}}">{{form.status.label}}</label>
-                                        {% render_field form.status data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.status.label %}
+                                        {% render_field form.status data-size="5" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.status.label %}
                                         <div id="{{form.status.name}}"></div>
                                     </div>
                                 </div>
@@ -221,7 +222,8 @@
 {% block javascript %}
 <script src="{% static 'js/datatables.min.js' %}"></script>
 <script src="{% static 'js/assets.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'js/selectpicker.js' %}"></script>
 <script>
 
     $(document).ready(function () {
@@ -260,13 +262,21 @@
         $("#{{form.localizacao.auto_id}}").change(function () {
             $("#{{form.localizacao.name}}").html("");
         });
+        $("#{{form.setor.auto_id}}").change(function () {
+            $("#{{form.setor.name}}").html("");
+        });
+        $("#{{form.grupo.auto_id}}").change(function () {
+            $("#{{form.grupo.name}}").html("");
+        });
         $("#{{form.categoria.auto_id}}").change(function () {
             $("#{{form.categoria.name}}").html("");
+        });
+        $("#{{form.fabricante.auto_id}}").change(function () {
+            $("#{{form.fabricante.name}}").html("");
         });
         $("#{{form.status.auto_id}}").change(function () {
             $("#{{form.status.name}}").html("");
         });
     });
-
 </script>
 {% endblock %}
