@@ -35,7 +35,7 @@ function getData() {
             {
                 "data": "codigo",
                 "render": function (data) {
-                    return `<a href="/equipamento/editar/${data}" class="btn btn-icon btn-pill btn-primary btn-sm" data-toggle="tooltip" title="Editar"><i class="fa fa-fw fa-edit"></i> </a> <a href="/equipamento/remover/${data}" class="btn btn-icon btn-pill btn-danger btn-sm" data-toggle="tooltip" title="Remover"> <i class="fa fa-fw fa-trash"></i></a>`;
+                    return `<a data-id="${data}" href="/equipamento/editar/${data}" class="open-EditModal btn btn-icon btn-pill btn-primary btn-sm" data-toggle="modal" data-target="#editarModal"><i class="fa fa-fw fa-edit" data-toggle="tooltip" title="Editar"></i> </a> <a data-id="${data}" href="/equipamento/remover/${data}" class="open-EditModal btn btn-icon btn-pill btn-danger btn-sm"> <i class="fa fa-fw fa-trash" data-toggle="tooltip" title="Remover"></i></a>`;
                 }
             },
         ],
@@ -134,4 +134,11 @@ function formCadastroLimpar() {
     $("#observacoes").html("");
     $("#numero_patrimonio").html("");
     $("#numero_serie").html("");
+}
+
+function formEditLoadData(id) {
+
+    $.ajax(function(){
+
+    });
 }

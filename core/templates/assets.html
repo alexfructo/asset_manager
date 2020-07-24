@@ -13,12 +13,13 @@
     <div class="card-body">
         <div class="row">
             <div class="col mt-2 mb-4">
-                <button class="btn btn-md btn-success" type="button" data-toggle="modal" data-target="#cadastroModal"><i
-                        class="fa fa-plus"></i> Adicionar Item</button>
-                <button class="btn btn-md btn-primary" type="button" id="atualizarLista"><i class="fa fa-sync"></i>
+                <button class="btn btn-md btn-success mt-2 mr-2" type="button" data-toggle="modal"
+                    data-target="#cadastroModal"><i class="fa fa-plus"></i> Adicionar Item</button>
+                <button class="btn btn-md btn-primary mt-2 mr-2" type="button" id="atualizarLista"><i
+                        class="fa fa-sync"></i>
                     Atualizar Lista</button>
                 <div class="btn-group">
-                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton"
+                    <button class="btn btn-dark dropdown-toggle mt-2 mr-2" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-download"></i> Exportar</button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -27,8 +28,9 @@
                         <a class="dropdown-item" href="#" id="csv">CSV</a>
                     </div>
                 </div>
-                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#collapseFiltros"
-                    aria-expanded="false" aria-controls="collapseFiltros"><i class="fa fa-filter"></i> Filtrar</button>
+                <button type="button" class="btn btn-danger mt-2 mr-2" data-toggle="collapse"
+                    data-target="#collapseFiltros" aria-expanded="false" aria-controls="collapseFiltros"><i
+                        class="fa fa-filter"></i> Filtrar</button>
             </div>
         </div>
         <div id="collapseFiltros" class="row mt-4 mx-md-1 justify-content-center collapse">
@@ -218,6 +220,42 @@
         </div>
     </div>
 </div>
+
+<!-- Editar Modal -->
+<div class="modal fade" id="editarModal" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarModalLabel"><i class="fa fa-edit"></i> Equipamento / Editar Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col px-3 my-2">
+                        <div id="editarModalResult"></div>
+                        <form action="" method="post" id="editarForm">
+                            <fieldset class="px-3">
+                                
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark mt-2 mr-2" data-dismiss="modal"><i class="fa fa-times"></i>
+                    Cancelar</button>
+                <button type="button" class="btn btn-success mt-2 mr-2" id="editarSalvar"><i class="fa fa-save"></i>
+                    Salvar</button>
+                <button type="button" class="btn btn-primary mt-2 mr-2" id="editarClonar"><i class="fa fa-copy"></i>
+                    Clonar</button>
+                <button type="button" class="btn btn-danger mt-2 mr-2" id="editarExcluir"><i class="fa fa-trash"></i>
+                    Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block javascript %}
 <script src="{% static 'js/datatables.min.js' %}"></script>
@@ -276,6 +314,11 @@
         });
         $("#{{form.status.auto_id}}").change(function () {
             $("#{{form.status.name}}").html("");
+        });
+
+        $(document).on("click", ".open-EditModal", function () {
+            var id = $(this).data('id');
+            formEditLoadData(id);
         });
     });
 </script>
