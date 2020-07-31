@@ -237,7 +237,13 @@
                         <div id="editarModalResult"></div>
                         <form action="" method="post" id="editarForm">
                             <fieldset class="px-3">
-                                
+                                <div class="row">
+                                    <div class="col-md-4 form-group">
+                                        <label for="{{form.localizacao.auto_id}}">{{form.localizacao.label}}</label>
+                                        {% render_field form.localizacao data-size="5" data-live-search="true" data-style="btn-outline-secondary" class="selectpicker form-control" placeholder=form.localizacao.label %}
+                                        <p id="{{form.localizacao.name}}"></p>
+                                    </div>
+                                </div>
                             </fieldset>
                         </form>
                     </div>

@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.core import serializers
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.db.models import Count
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, EquipamentoForm
@@ -32,7 +33,16 @@ def user_logout(request):
 
 @login_required()
 def index(request):
-    return render(request, 'index.html')
+    data = {
+        'equipamentos_qtd': Equipamento.objects.count(),
+        'equipamentos_qtd_arm': Equipamento.objects.filter(status=0).count(),
+        'equipamentos_qtd_alo': Equipamento.objects.filter(status=1).count(),
+        'equipamentos_qtd_des': Equipamento.objects.filter(status=2).count(),
+        'equipamentos_categorias': Equipamento.objects.all().values('categoria__nome').annotate(total=Count('categoria')).order_by('total'),
+        'equipamentos_unidades': Equipamento.objects.all().values('localizacao__nome').annotate(total=Count('localizacao')).order_by('total'),
+        'equipamentos_status': Equipamento.objects.all().values('status').annotate(total=Count('status')).order_by('total')
+    }
+    return render(request, 'index.html', data)
 
 
 @login_required
@@ -98,21 +108,21 @@ def asset_register_ajax(request):
         form = EquipamentoForm(request.POST or None)
         if form.is_valid():
             equipamento = Equipamento(
-                usuario = request.user,
-                localizacao = form.cleaned_data['localizacao'],
-                grupo = form.cleaned_data['grupo'],
-                setor = form.cleaned_data['setor'],
-                categoria = form.cleaned_data['categoria'],
-                fabricante = form.cleaned_data['fabricante'],
-                status = form.cleaned_data['status'],
-                numero_serie = form.cleaned_data['numero_serie'],
-                numero_patrimonio = form.cleaned_data['numero_patrimonio'],
-                observacoes = form.cleaned_data['observacoes'],
+                usuario=request.user,
+                localizacao=form.cleaned_data['localizacao'],
+                grupo=form.cleaned_data['grupo'],
+                setor=form.cleaned_data['setor'],
+                categoria=form.cleaned_data['categoria'],
+                fabricante=form.cleaned_data['fabricante'],
+                status=form.cleaned_data['status'],
+                numero_serie=form.cleaned_data['numero_serie'],
+                numero_patrimonio=form.cleaned_data['numero_patrimonio'],
+                observacoes=form.cleaned_data['observacoes'],
             )
             equipamento.save()
             data = {
                 "success": True,
-                "message":"Cadastro realizado com sucesso.",
+                "message": "Cadastro realizado com sucesso.",
             }
             return JsonResponse(data, status=200)
         else:
@@ -121,7 +131,7 @@ def asset_register_ajax(request):
                 "message": dict(form.errors.items()),
             }
             return JsonResponse(data, status=200)
-                
+
 
 @login_required()
 def asset_edit(request, codigo, message=None):

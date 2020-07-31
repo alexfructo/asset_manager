@@ -2,9 +2,176 @@
 {% block title %} - Painel{% endblock %}
 {% block content %}
 <h2 class="mb-4">Painel</h2>
-<div class="card mb-4">
-    <div class="card-body">
-        
+<div class="row mb-5">
+    <div class="col-md">
+        <div class="d-flex border">
+            <div class="bg-primary text-light p-4">
+                <div class="d-flex align-items-center h-100">
+                    <i class="fa fa-3x fa-fw fa-cog"></i>
+                </div>
+            </div>
+            <div class="flex-grow-1 bg-white p-4">
+                <p class="text-uppercase text-secondary mb-0">Equipamentos</p>
+                <h3 class="font-weight-bold mb-0">{{ equipamentos_qtd }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="d-flex border">
+            <div class="bg-success text-light p-4">
+                <div class="d-flex align-items-center h-100">
+                    <i class="fa fa-3x fa-fw fa-cube"></i>
+                </div>
+            </div>
+            <div class="flex-grow-1 bg-white p-4">
+                <p class="text-uppercase text-secondary mb-0">Armazenado</p>
+                <h3 class="font-weight-bold mb-0">{{ equipamentos_qtd_arm }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="d-flex border">
+            <div class="bg-warning text-light p-4">
+                <div class="d-flex align-items-center h-100">
+                    <i class="fa fa-3x fa-fw fa-archive"></i>
+                </div>
+            </div>
+            <div class="flex-grow-1 bg-white p-4">
+                <p class="text-uppercase text-secondary mb-0">Alocado</p>
+                <h3 class="font-weight-bold mb-0">{{ equipamentos_qtd_alo }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="d-flex border">
+            <div class="bg-danger text-light p-4">
+                <div class="d-flex align-items-center h-100">
+                    <i class="fa fa-3x fa-fw fa-trash"></i>
+                </div>
+            </div>
+            <div class="flex-grow-1 bg-white p-4">
+                <p class="text-uppercase text-secondary mb-0">Descartado</p>
+                <h3 class="font-weight-bold mb-0">{{ equipamentos_qtd_des }}</h3>
+            </div>
+        </div>
     </div>
 </div>
+<div class="row mb-5">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header bg-white font-weight-bold">
+                Equipamentos por Categoria
+            </div>
+            <div class="card-body">
+                <div id="chart_div_categoria"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header bg-white font-weight-bold">
+                Equipamentos por Unidade
+            </div>
+            <div class="card-body">
+                <div id="chart_div_unidade"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header bg-white font-weight-bold">
+                Equipamentos por Status
+            </div>
+            <div class="card-body">
+                <div id="chart_div_status"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChartUnidade);
+    google.charts.setOnLoadCallback(drawChartCategoria);
+    google.charts.setOnLoadCallback(drawChartStatus);
+    function drawChartCategoria() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+            {% if equipamentos_categorias %}
+            {% for equipamento in equipamentos_categorias %}
+            ['{{ equipamento.categoria__nome }}', {{ equipamento.total }}],
+                {% endfor %}
+            {% endif %}
+        ]);
+
+    // Set chart options
+    var options = {
+        'legend': 'left',
+        pieSliceText: 'label',
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div_categoria'));
+    chart.draw(data, options);
+    }
+
+    function drawChartUnidade() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+            {% if equipamentos_unidades %}
+                {% for equipamento in equipamentos_unidades %}
+                    ['{{ equipamento.localizacao__nome }}', {{ equipamento.total }}],
+                {% endfor %}
+            {% endif %}
+
+        ]);
+
+    // Set chart options
+    var options = {
+        'legend': 'left',
+        pieSliceText: 'label',
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div_unidade'));
+    chart.draw(data, options);
+    }
+
+    function drawChartStatus() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+            {% if equipamentos_status %}
+                {% for equipamento in equipamentos_status %}
+                    ['{% if equipamento.status == 0 %}Armazenado{% endif %}{% if equipamento.status == 1 %}Alocado{% endif %}{% if equipamento.status == 2 %}Descartado{% endif %}', {{ equipamento.total }}],
+                {% endfor %}
+            {% endif %}
+
+        ]);
+
+    // Set chart options
+    var options = {
+        'legend': 'left',
+        pieSliceText: 'label',
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div_status'));
+    chart.draw(data, options);
+    }
+</script>
 {% endblock %}
