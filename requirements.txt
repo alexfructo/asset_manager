@@ -1,5 +1,5 @@
 ﻿asgiref==3.4.1
-Django==3.2.15
+Django==3.2.18
 django-widget-tweaks==1.4.8
 packaging==21.0
 pip-review==1.1.0
