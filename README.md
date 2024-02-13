@@ -1,25 +1,54 @@
 # Asset Manager
 
-Um aplicativo web simples, para gerenciar ativos de TI.
+Asset Manager é uma aplicação web desenvolvida em Django para gerenciar ativos de TI, como equipamentos, localizações, setores, grupos, categorias e fabricantes.
 
-Desenvolvido com Python, Django e Bootstrap 4.
+## Capturas de tela
+
+
+### Tela de Login
+![Tela de Login](screenshots/asset_manager_login.jpg)
+
+### Dashboard
+![Dashboard](screenshots/asset_manager_home.jpg)
+
+### Página de Ativos
+![Página de Ativos](screenshots/asset_manager_assets_page.jpg)
+
+### Página de Cadastros
+![Página de Cadastros](screenshots/asset_manager_assets_add.jpg)
 
 ## Funcionalidades
-  
-  Cadastro de equipamentos, unidades, setores, localizações, categorias e fabricantes.
-  Auditoria completa de ações de usuários.
+
+- Autenticação de usuário: Login e Logout.
+- Dashboard: Visualização de estatísticas e resumos dos ativos.
+- Gerenciamento de Ativos: Cadastro, edição e exclusão de equipamentos.
+- Filtros: Filtre os ativos por localização, setor, grupo, categoria, fabricante e status.
 
 ## Instalação
 
-Utilize o gerenciador de pacotes [pip](https://pip.pypa.io/en/stable/) para instalar as dependências do projeto.
+1. Clone o repositório:
+    ```
+    git clone https://github.com/alexfructo/asset-manager.git
+    ```
 
-```bash
-pip install -r requirements.txt
-```
+2. Instale as dependências:
+    ```
+    pip install -r requirements.txt
+    ```
 
-## Contribuição
-Solicitações pull são bem vindas. 
+3. Execute as migrações:
+    ```
+    python manage.py migrate
+    ```
 
-Para grandes mudanças, abra uma issue primeiro para discutir o que você gostaria de mudar.
+4. Inicie o servidor:
+    ```
+    python manage.py runserver
+    ```
 
-Por favor, atualize os testes conforme for apropriado.
+## Tecnologias Utilizadas
+
+- Django: Framework web em Python para desenvolvimento rápido.
+- HTML/CSS: Frontend para a interface de usuário.
+- JavaScript: Para interatividade dinâmica na aplicação.
+- Bootstrap: Framework CSS para design responsivo e componentes front-end.
