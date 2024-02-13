@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout
 from django.db.models import Count
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from .forms import LoginForm, EquipamentoForm
 from .models import Equipamento, Localizacao, Setor, Grupo, Categoria, Fabricante
 
@@ -104,7 +105,7 @@ def assets_list_as_json(request):
 
 @login_required()
 def asset_register_ajax(request):
-    if request.method == 'POST' and request.is_ajax():
+    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
         form = EquipamentoForm(request.POST or None)
         if form.is_valid():
             equipamento = Equipamento(
@@ -131,7 +132,6 @@ def asset_register_ajax(request):
                 "message": dict(form.errors.items()),
             }
             return JsonResponse(data, status=200)
-
 
 @login_required()
 def asset_edit(request, codigo, message=None):
