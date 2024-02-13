@@ -6,16 +6,16 @@ Asset Manager é uma aplicação web desenvolvida em Django para gerenciar ativo
 
 
 ### Tela de Login
-![Tela de Login](screenshots/asset_manager_login.jpg)
+![Tela de Login](screenshoots/asset_manager_login.jpg)
 
 ### Dashboard
-![Dashboard](screenshots/asset_manager_home.jpg)
+![Dashboard](screenshoots/asset_manager_home.jpg)
 
 ### Página de Ativos
-![Página de Ativos](screenshots/asset_manager_assets_page.jpg)
+![Página de Ativos](screenshoots/asset_manager_assets_page.jpg)
 
 ### Página de Cadastros
-![Página de Cadastros](screenshots/asset_manager_assets_add.jpg)
+![Página de Cadastros](screenshoots/asset_manager_assets_add.jpg)
 
 ## Funcionalidades
 
